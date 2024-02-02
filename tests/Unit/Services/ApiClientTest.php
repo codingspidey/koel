@@ -53,10 +53,10 @@ class ApiClientTest extends TestCase
     {
         /** @var Client $client */
         $client = Mockery::mock(Client::class, [
-            $method => new Response(200, [], $responseBody),
-        ]);
+            $method => new Response(500, [], $responseBody),
+        ])
 
-        $api = new ConcreteApiClient($client, $this->cache, $this->logger);
+        $api = new ConcreteApiClient($client, $this->cache, $this->loggers);
 
         self::assertSame((array) json_decode($responseBody), (array) $api->$method('/'));
     }
